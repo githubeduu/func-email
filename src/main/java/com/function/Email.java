@@ -40,8 +40,8 @@ public class Email {
         String body = "Se ha realizado una nueva solicitud: " + numeroSolcitud;
 
         String host = "smtp.gmail.com";
-        String from = "kotesepulveda28@gmail.com";
-        String password = "ieou biui ilct wvqg";
+        String from = "noreplyproyectduoc@gmail.com";
+        String password = "ifvb xyed vogf ytjy";
 
         Properties properties = new Properties();
         properties.put("mail.smtp.host", host);
@@ -60,7 +60,34 @@ public class Email {
             message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
-            message.setText(body);
+
+            String htmlBody = "<!DOCTYPE html>\r\n" +
+                            "<html>\r\n" +
+                            "<head>\r\n" +
+                            "  <meta charset=\"UTF-8\">\r\n" +
+                            "  <title>Solicitud Recibida</title>\r\n" +
+                            "</head>\r\n" +
+                            "<body style=\"font-family: Arial, sans-serif; color: #333; line-height: 1.6; background-color: #f9f9f9; padding: 20px;\">\r\n" +
+                            "  <div style=\"max-width: 600px; margin: auto; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);\">\r\n" +
+                            "    <h2 style=\"text-align: center; color: #004B8D;\">✉️ Solicitud Recibida</h2>\r\n" +
+                            "    <p>Estimado(a) ciudadano(a),</p>\r\n" +
+                            "    <p>Hemos recibido exitosamente su solicitud ingresada en el sistema OIRS del Ministerio de Vivienda y Urbanismo (MINVU).</p>\r\n" +
+                            "    <p><strong>Número de Solicitud:</strong> <span style=\"color: #004B8D;\">{{numeroSolicitud}}</span></p>\r\n" +
+                            "    <p><strong>Correo asociado:</strong> {{correo}}</p>\r\n" +
+                            "    <p>Nos pondremos en contacto contigo a la brevedad para entregarte una respuesta o actualización sobre tu requerimiento.</p>\r\n" +
+                            "    <p>Gracias por utilizar nuestro sistema de atención ciudadana.</p>\r\n" +
+                            "    <p style=\"margin-top: 30px;\">Saludos cordiales,<br>Equipo OIRS - MINVU</p>\r\n" +
+                            "    <hr>\r\n" +
+                            "    <small style=\"color: #999;\">Este es un mensaje automático, por favor no respondas este correo.</small>\r\n" +
+                            "  </div>\r\n" +
+                            "</body>\r\n" +
+                            "</html>";
+
+                        htmlBody = htmlBody
+                            .replace("{{numeroSolicitud}}", numeroSolcitud)
+                            .replace("{{correo}}", to);
+
+                        message.setContent(htmlBody, "text/html; charset=utf-8");
 
             Transport.send(message);
             context.getLogger().info("Correo enviado correctamente");
