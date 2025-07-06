@@ -40,7 +40,7 @@ public class Email {
 
         if (tipo == 2) {
             subject = "Estado de tu solicitud actualizado";
-            htmlBody = getHtmlPlantillaCambioEstado(numeroSolicitud, to);
+            htmlBody = getHtmlPlantillaCambioEstado(numeroSolicitud, to, emailRequest.getDetalleMovimiento());
         } else {
             subject = "Solicitud recibida con éxito";
             htmlBody = getHtmlPlantillaRecibida(numeroSolicitud, to);
@@ -100,13 +100,16 @@ public class Email {
                 "</div></body></html>";
     }
 
-    private static String getHtmlPlantillaCambioEstado(String numeroSolicitud, String correo) {
+    private static String getHtmlPlantillaCambioEstado(String numeroSolicitud, String correo, String detalleMovimiento) {
         return "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Estado Actualizado</title></head>" +
                 "<body style=\"font-family: Arial, sans-serif; color: #333; line-height: 1.6; background-color: #f4f4f4; padding: 20px;\">" +
                 "<div style=\"max-width: 600px; margin: auto; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);\">" +
                 "<h2 style=\"text-align: center; color: #D97706;\">📌 Estado de Solicitud Actualizado</h2>" +
                 "<p>Estimado(a) ciudadano(a),</p>" +
                 "<p>Te informamos que tu solicitud con número <strong style=\"color:#D97706;\">" + numeroSolicitud + "</strong> ha cambiado de estado.</p>" +
+                "<p><strong>Detalle de la gestión:</strong></p>" +
+                "<p style=\"background-color: #fef3c7; padding: 10px; border-left: 4px solid #D97706; border-radius: 4px;\">" +
+                detalleMovimiento + "</p>" +
                 "<p>Revisa tu correo regularmente para conocer más actualizaciones o respuestas.</p>" +
                 "<p style=\"margin-top: 30px;\">Saludos cordiales,<br>Equipo OIRS - MINVU</p>" +
                 "<hr><small style=\"color: #999;\">Este es un mensaje automático, por favor no respondas este correo.</small>" +

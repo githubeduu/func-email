@@ -4,6 +4,8 @@ public class EmailRequest {
     private String correo;
     private String numeroSolicitud;
     private int tipo;
+    private String detalleMovimiento;
+
 
     // Getters y Setters
     public String getCorreo() {
@@ -28,5 +30,13 @@ public class EmailRequest {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    public String getDetalleMovimiento() {
+        return detalleMovimiento;
+    }
+
+    public void setDetalleMovimiento(String detalleMovimiento) {
+        this.detalleMovimiento = detalleMovimiento;
     }
 }
